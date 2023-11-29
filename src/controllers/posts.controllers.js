@@ -23,7 +23,7 @@ module.exports.addPost = (req, res) => {
 
 module.exports.getPosts = (req, res) => {
   const postQuery =
-    "SELECT A.*, B.username, C.user_id as user_likes FROM posts A INNER JOIN users B ON A.user_id=B.id LEFT JOIN like_post C ON A.id = C.post_id";
+    "SELECT A.*, B.username FROM posts A INNER JOIN users B ON A.user_id=B.id ";
 
   db.query(postQuery, (err, result) => {
     if (err) {
@@ -40,7 +40,7 @@ module.exports.getPosts = (req, res) => {
 module.exports.getPost = (req, res) => {
   const { id } = req.params;
   const postQuery =
-    "SELECT A.*, B.username, C.user_id as user_likes FROM posts A INNER JOIN users B ON A.user_id=B.id LEFT JOIN like_post C ON A.id = C.post_id WHERE A.id = ?";
+    "SELECT A.*, B.username FROM posts A INNER JOIN users B ON A.user_id=B.id WHERE A.id = ?";
 
   db.query(postQuery, id, (err, result) => {
     if (err) {
