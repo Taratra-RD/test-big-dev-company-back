@@ -30,7 +30,6 @@ module.exports.getPosts = (req, res) => {
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-    createHistory(req.body.content);
 
     res
       .status(200)
@@ -48,7 +47,6 @@ module.exports.getPost = (req, res) => {
       console.error(err);
       return res.status(500).json({ message: "Internal Server Error" });
     }
-    createHistory(req.body.content);
 
     res
       .status(200)
