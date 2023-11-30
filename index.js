@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3001"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "PATCH"],
     credentials: true,
   })
@@ -27,6 +27,6 @@ app.use("/api/comment", commentRoute);
 app.use("/api/like", likeRoute);
 app.use("/api/historic", historicRoute);
 
-app.listen(3000, () => {
-  console.log("Server listen on port 3000");
+app.listen(5000, () => {
+  console.log("Server listen on port 5000");
 });
