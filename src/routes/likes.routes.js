@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-const { updateLikes } = require("../controllers/likes.controllers");
+const { updateLikes, getLike } = require("../controllers/likes.controllers");
 
-router.post("/:id", updateLikes);
+router.post("/:id", updateLikes).post("/get/:id", getLike);
 
 module.exports = router;

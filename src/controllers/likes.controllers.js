@@ -6,6 +6,23 @@ const { isEmpty } = require("../services/varEmpty");
         "user_id":"1"
     } */
 
+module.exports.getLike = (req, res) => {
+  const { id } = req.params;
+  const { user_id } = req.body;
+
+  const likeQuery = "SELECT * FROM like_post WHERE post_id = ? AND user_id = ?";
+  db.query(likeQuery, [id, user_id], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Get liked post successfully!", result: result });
+  });
+};
+
 module.exports.updateLikes = (req, res) => {
   const { id } = req.params;
   const { user_id } = req.body;
@@ -50,7 +67,7 @@ module.exports.updateLikes = (req, res) => {
           );
         });
         res
-          .status(201)
+          .status(200)
           .json({ message: "Liked post successfully!", result: result });
       });
     } else {
@@ -77,7 +94,9 @@ module.exports.updateLikes = (req, res) => {
             }
           );
         });
-        res.status(201).json({ message: "Disliked post successfully!" });
+        res
+          .status(200)
+          .json({ message: "Disliked post successfully!", result: result });
       });
     }
   });

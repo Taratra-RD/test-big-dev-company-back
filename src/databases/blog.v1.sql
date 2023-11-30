@@ -25,7 +25,9 @@ CREATE TABLE
         id INT PRIMARY KEY AUTO_INCREMENT,
         content TEXT,
         post_id INT,
+        user_id INT,
         createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
         FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE ON UPDATE CASCADE
     );
 

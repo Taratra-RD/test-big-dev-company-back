@@ -21,7 +21,8 @@ module.exports.addComment = (req, res) => {
 };
 
 module.exports.getComments = (req, res) => {
-  const commentQuery = "SELECT * FROM comments WHERE post_id = ?";
+  const commentQuery =
+    "SELECT A.*, B.username FROM comments A INNER JOIN users B ON A.user_id = B.id WHERE A.post_id = ?";
 
   db.query(commentQuery, req.body.post_id, (err, result) => {
     if (err) {
@@ -37,7 +38,8 @@ module.exports.getComments = (req, res) => {
 
 module.exports.getComment = (req, res) => {
   const { id } = req.params;
-  const commentQuery = "SELECT * FROM comments WHERE post_id = ? AND id = ?";
+  const commentQuery =
+    "SELECT A.*, B.username FROM comments A INNER JOIN users B ON A.user_id = B.id WHERE A.post_id = ? AND A.id = ?";
 
   db.query(commentQuery, [req.body.post_id, id], (err, result) => {
     if (err) {
